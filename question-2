@@ -1,0 +1,99 @@
+#include <iostream>
+using namespace std;
+
+// Hardware class
+class Hardware {
+protected:
+    int ram;
+    float monitorSize;
+    string processor;
+    float processorSpeed;
+
+public:
+    void getHardware() {
+        cout << "Enter RAM (GB): ";
+        cin >> ram;
+        cout << "Enter Monitor Size (inches): ";
+        cin >> monitorSize;
+        cout << "Enter Processor Name: ";
+        cin >> processor;
+        cout << "Enter Processor Speed (GHz): ";
+        cin >> processorSpeed;
+    }
+
+    void showHardware() {
+        cout << "\nRAM: " << ram << " GB";
+        cout << "\nMonitor Size: " << monitorSize << " inches";
+        cout << "\nProcessor: " << processor;
+        cout << "\nProcessor Speed: " << processorSpeed << " GHz";
+    }
+};
+
+// Software class
+class Software {
+protected:
+    string applicationSoftware[3];
+    string systemSoftware[4];
+
+public:
+    void getSoftware() {
+        cout << "\nEnter 3 Application Software:\n";
+        for (int i = 0; i < 3; i++)
+            cin >> applicationSoftware[i];
+
+        cout << "Enter 4 System Software:\n";
+        for (int i = 0; i < 4; i++)
+            cin >> systemSoftware[i];
+    }
+
+    void showSoftware() {
+        cout << "\nApplication Software: ";
+        for (int i = 0; i < 3; i++)
+            cout << applicationSoftware[i] << " ";
+
+        cout << "\nSystem Software: ";
+        for (int i = 0; i < 4; i++)
+            cout << systemSoftware[i] << " ";
+    }
+};
+
+// Dealer class
+class Dealer : public Hardware, public Software {
+private:
+    float commission;
+
+public:
+    void getDealerDetails() {
+        getHardware();
+        getSoftware();
+        cout << "Enter Dealer Commission: ";
+        cin >> commission;
+    }
+
+    void displayDealer() {
+        showHardware();
+        showSoftware();
+        cout << "\nCommission: " << commission << endl;
+    }
+};
+
+int main() {
+    int n;
+    cout << "Enter number of dealers: ";
+    cin >> n;
+
+    Dealer d[n];
+
+    for (int i = 0; i < n; i++) {
+        cout << "\nEnter details for Dealer " << i + 1 << endl;
+        d[i].getDealerDetails();
+    }
+
+    cout << "\n--- Dealer Details ---\n";
+    for (int i = 0; i < n; i++) {
+        d[i].displayDealer();
+        cout << "\n-------------------------\n";
+    }
+
+    return 0;
+}
