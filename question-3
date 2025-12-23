@@ -1,0 +1,118 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+// Abstract class
+class Shape {
+public:
+    virtual void calculate_area() = 0;
+    virtual void calculate_circumference() = 0;
+};
+
+// Square class
+class Square : public Shape {
+private:
+    float a;
+
+public:
+    Square(float side) {
+        a = side;
+    }
+
+    void calculate_area() {
+        cout << "Square Area: " << a * a << endl;
+    }
+
+    void calculate_circumference() {
+        cout << "Square Circumference: " << 4 * a << endl;
+    }
+};
+
+// Rectangle class
+class Rectangle : public Shape {
+private:
+    float a, b;
+
+public:
+    Rectangle(float x, float y) {
+        a = x;
+        b = y;
+    }
+
+    void calculate_area() {
+        cout << "Rectangle Area: " << a * b << endl;
+    }
+
+    void calculate_circumference() {
+        cout << "Rectangle Circumference: " << 2 * (a + b) << endl;
+    }
+};
+
+// Circle class
+class Circle : public Shape {
+private:
+    float r;
+
+public:
+    Circle(float radius) {
+        r = radius;
+    }
+
+    void calculate_area() {
+        cout << "Circle Area: " << 3.14159 * r * r << endl;
+    }
+
+    void calculate_circumference() {
+        cout << "Circle Circumference: " << 2 * 3.14159 * r << endl;
+    }
+};
+
+// Triangle class
+class Triangle : public Shape {
+private:
+    float a, b, c;
+
+public:
+    Triangle(float x, float y, float z) {
+        a = x;
+        b = y;
+        c = z;
+    }
+
+    void calculate_area() {
+        float s = (a + b + c) / 2;
+        cout << "Triangle Area: "
+             << sqrt(s * (s - a) * (s - b) * (s - c)) << endl;
+    }
+
+    void calculate_circumference() {
+        cout << "Triangle Circumference: " << a + b + c << endl;
+    }
+};
+
+int main() {
+    Shape* s;
+
+    Square sq(4);
+    Rectangle r(4, 5);
+    Circle c(3);
+    Triangle t(3, 4, 5);
+
+    s = &sq;
+    s->calculate_area();
+    s->calculate_circumference();
+
+    s = &r;
+    s->calculate_area();
+    s->calculate_circumference();
+
+    s = &c;
+    s->calculate_area();
+    s->calculate_circumference();
+
+    s = &t;
+    s->calculate_area();
+    s->calculate_circumference();
+
+    return 0;
+}
